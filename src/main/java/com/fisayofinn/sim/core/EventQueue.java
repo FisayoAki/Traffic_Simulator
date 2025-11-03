@@ -2,6 +2,7 @@ package com.fisayofinn.sim.core;
 
 import java.util.PriorityQueue;
 
+/** Implements a PriorityQueue for adding, removing and sorting Events */
 public class EventQueue {
 
     // One priority queue per simulation so it is final
@@ -15,6 +16,10 @@ public class EventQueue {
     // Add event to queue
     public void addEvent(Event myEvent){
         eventQueue.add(myEvent);
+    }
+
+    public Event retrieveEvent(){
+        return eventQueue.poll();
     }
 
     // Check if queue has no events to proceed with
