@@ -19,7 +19,7 @@ public class EventQueue {
 
     // Check if queue has no events to proceed with
     public boolean isEmpty(){
-        return eventQueue.isEmpty()
+        return eventQueue.isEmpty();
     }
 
 }
