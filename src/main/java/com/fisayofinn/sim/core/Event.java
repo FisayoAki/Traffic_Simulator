@@ -1,6 +1,6 @@
 package com.fisayofinn.sim.core;
 
-public class Event {
+public class Event implements Comparable<Event>{
 
     private double time;
     private EventType type;
