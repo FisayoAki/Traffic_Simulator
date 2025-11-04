@@ -18,6 +18,7 @@ public class EventQueue {
         eventQueue.add(myEvent);
     }
 
+    // Retrieve and Remove the earliest Event in the queue
     public Event retrieveEvent(){
         return eventQueue.poll();
     }
