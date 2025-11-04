@@ -24,6 +24,12 @@ public class Event implements Comparable<Event>{
         return Integer.compare(this.userID, other.userID);
         }
 
+    @Override
+    public String toString() {
+        return String.format("Event{time=%.2f, type=%s, userID=%d}", time, type, userID);
+    }
+
+
     //Getters
     public double getTime() {
         return time;
