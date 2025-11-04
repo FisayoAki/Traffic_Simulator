@@ -23,7 +23,6 @@ public class Event implements Comparable<Event>{
         // If equal timing, prioritise lower userID
         return Integer.compare(this.userID, other.userID);
         }
-    }
 
     //Getters
     public double getTime() {
