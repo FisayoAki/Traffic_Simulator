@@ -20,10 +20,10 @@ public class SimulationManager {
         this.eventQueue = new EventQueue();
         this.sources = new ArrayList<>();
 
-        // Create sources; all start OFF for Phase 1 (simple, deterministic).
+        // Create sources; all start OFF for Phase 1 .
         for (int i = 1; i <= sourceCount; i++) {
             HeavyTail onDurations  = new HeavyTail(1.4, 0.5, new Random(1000 + i));
-            HeavyTail offDurations = new HeavyTail(1.8, 0.2, new Random(2000 + i));
+            HeavyTail offDurations = new HeavyTail(1.4, 0.5, new Random(2000 + i));
             boolean startOn = false;
 
             OnOffSource src = new OnOffSource(i, onDurations, offDurations, startOn);
@@ -84,4 +84,12 @@ public class SimulationManager {
                 break;
         }
     }
+
+    // Additional Methods for Testing
+    public double getSimTime() { return simTime; }
+    public int getActiveSources() { return activeSources; }
+
+
+
+
 }
