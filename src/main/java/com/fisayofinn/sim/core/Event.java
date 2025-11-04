@@ -3,9 +3,9 @@ package com.fisayofinn.sim.core;
 /** Event objects */
 public class Event implements Comparable<Event>{
 
-    private double time;
-    private EventType type;
-    private int userID;
+    private final double time;
+    private final EventType type;
+    private final int userID;
 
     // Constructor
     public Event(double time, EventType type, int userID) {
@@ -17,13 +17,18 @@ public class Event implements Comparable<Event>{
     // Compare Event objects to find which has priority
     @Override
     public int compareTo(Event other) {
-        // If equal timing, prioritise lower userID
-        if (this.time == other.time){
-            return this.userID < other.userID ? 1 : -1;
-        }else {
-            return this.time > other.time ? 1 : -1;
+        if (Double.compare(this.time, other.time) != 0) {
+            return Double.compare(this.time, other.time);
         }
+        // If equal timing, prioritise lower userID
+        return Integer.compare(this.userID, other.userID);
+        }
+
+    @Override
+    public String toString() {
+        return String.format("Event{time=%.2f, type=%s, userID=%d}", time, type, userID);
     }
+
 
     //Getters
     public double getTime() {
