@@ -28,4 +28,12 @@ public class EventQueue {
         return eventQueue.isEmpty();
     }
 
+    public int queueLength(){
+        return eventQueue.size();
+    }
+
+    public void emptyQueue(){
+        eventQueue.clear();
+    }
+
 }
