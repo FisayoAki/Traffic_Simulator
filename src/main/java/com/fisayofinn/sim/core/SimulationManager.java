@@ -1,12 +1,10 @@
 package com.fisayofinn.sim.core;
 
+import com.fisayofinn.sim.math.HeavyTail;
 import com.fisayofinn.sim.sources.OnOffSource;
-import org.w3c.dom.events.EventException;
 
 import java.util.ArrayList;
 import java.util.*;
-
-
 
 public class SimulationManager {
 
@@ -15,10 +13,18 @@ public class SimulationManager {
     private double simTime, endTime;
     private int activeSources;
 
+    public SimulationManager(double endTime, int sourceCount){
+        this.endTime = endTime;
+        this.simTime = 0;
+        this.activeSources = 0;
+        this.eventQueue = new EventQueue();
+        this.sources = new ArrayList<>();
 
+        for(int i = 1; i <= sourceCount; i++){
+            sources.add(new OnOffSource(i,onDurations,offDurations, startOn));
 
-    public SimulationManager(){
-        eventQueue = new EventQueue();
+        }
+
         // Create the END event from user input
         eventQueue.addEvent(new Event(endTime, EventType.END, -1));
 
@@ -51,6 +57,7 @@ public class SimulationManager {
                 break;
             case END:
                 // do not process any more events
+                // maybe remove all events from future?
                 // end simulation
                 break;
 
