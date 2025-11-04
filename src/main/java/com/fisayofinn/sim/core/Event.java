@@ -2,8 +2,7 @@ package com.fisayofinn.sim.core;
 
 /** Event objects */
 public class Event implements Comparable<Event>{
-
-
+    
     private double time;
     private EventType type;
     private int userID;

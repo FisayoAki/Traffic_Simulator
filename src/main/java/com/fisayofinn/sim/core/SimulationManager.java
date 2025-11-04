@@ -22,7 +22,6 @@ public class SimulationManager {
 
         for(int i = 1; i <= sourceCount; i++){
             sources.add(new OnOffSource(i,onDurations,offDurations, startOn));
-
         }
 
         // Create the END event from user input
