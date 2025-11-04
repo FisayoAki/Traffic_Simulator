@@ -10,7 +10,8 @@ public class SimulationManager {
 
     private final EventQueue eventQueue;
     private final ArrayList<OnOffSource> sources;
-    private double simTime, endTime;
+    private double simTime;
+    private final double endTime;
     private int activeSources;
 
     public SimulationManager(double endTime, int sourceCount) {
@@ -47,7 +48,7 @@ public class SimulationManager {
     }
 
     private void processEvent(Event event) {
-        int srcId = event.getUserID();            // your Event uses 'userID'
+        int srcId = event.getUserID();
         if (event.getType() == EventType.END) {   // stop condition
             return;
         }

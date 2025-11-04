@@ -17,11 +17,11 @@ public class Event implements Comparable<Event>{
     // Compare Event objects to find which has priority
     @Override
     public int compareTo(Event other) {
+        if (Double.compare(this.time, other.time) != 0) {
+            return Double.compare(this.time, other.time);
+        }
         // If equal timing, prioritise lower userID
-        if (this.time == other.time){
-            return this.userID < other.userID ? 1 : -1;
-        }else {
-            return this.time > other.time ? 1 : -1;
+        return Integer.compare(this.userID, other.userID);
         }
     }
 
