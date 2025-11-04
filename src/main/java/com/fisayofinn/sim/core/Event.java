@@ -3,9 +3,9 @@ package com.fisayofinn.sim.core;
 /** Event objects */
 public class Event implements Comparable<Event>{
 
-    private double time;
-    private EventType type;
-    private int userID;
+    private final double time;
+    private final EventType type;
+    private final int userID;
 
     // Constructor
     public Event(double time, EventType type, int userID) {

@@ -14,6 +14,7 @@ public class SimulationManager {
     private final double endTime;
     private int activeSources;
 
+    // Constructor
     public SimulationManager(double endTime, int sourceCount) {
         this.endTime = endTime;
         this.simTime = 0.0;
@@ -39,6 +40,7 @@ public class SimulationManager {
         eventQueue.addEvent(new Event(endTime, EventType.END, -1));
     }
 
+    // Simulation Loop
     public void simLoop() {
         while (simTime < endTime && !eventQueue.isEmpty()) {
             Event e = eventQueue.retrieveEvent();
@@ -47,6 +49,7 @@ public class SimulationManager {
         }
     }
 
+    // Retrieves Event, changes Source state and creates new Event
     private void processEvent(Event event) {
         int srcId = event.getUserID();
         if (event.getType() == EventType.END) {   // stop condition
@@ -81,7 +84,7 @@ public class SimulationManager {
                 break;
 
             default:
-                // (No RECORD handling in this minimal version.)
+                // (No RECORD handling in this MVP)
                 break;
         }
     }
