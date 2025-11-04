@@ -1,4 +1,3 @@
 package com.fisayofinn.sim.core;
 
-public class EventType {
-}
+public enum EventType {ON, OFF, RECORD, END}
