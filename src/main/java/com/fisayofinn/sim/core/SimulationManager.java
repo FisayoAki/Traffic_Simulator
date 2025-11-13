@@ -24,7 +24,7 @@ public class SimulationManager {
 
         // Create sources; all start OFF for Phase 1 .
         for (int i = 1; i <= sourceCount; i++) {
-            HeavyTail onDurations  = new HeavyTail(1.4, 0.5, new Random(1000 + i));
+            HeavyTail onDurations = new HeavyTail(1.4, 0.5, new Random(1000 + i));
             HeavyTail offDurations = new HeavyTail(1.4, 0.5, new Random(2000 + i));
             boolean startOn = false;
 
@@ -90,10 +90,13 @@ public class SimulationManager {
     }
 
     // Additional Methods for Testing
-    public double getSimTime() { return simTime; }
-    public int getActiveSources() { return activeSources; }
+    public double getSimTime() {
+        return simTime;
+    }
 
-
+    public int getActiveSources() {
+        return activeSources;
+    }
 
 
 }
