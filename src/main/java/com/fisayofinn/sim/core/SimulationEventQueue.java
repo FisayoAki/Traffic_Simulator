@@ -6,34 +6,20 @@ import java.util.PriorityQueue;
 public class SimulationEventQueue {
 
     // One priority queue per simulation so it is final
-    private final PriorityQueue<SimulationEvent> eventQueue;
-
-    // Constructor
-    public SimulationEventQueue() {
-        this.eventQueue = new PriorityQueue<SimulationEvent>();
-    }
+    private final PriorityQueue<SimulationEvent> pq = new PriorityQueue<>();
 
     // Add event to queue
-    public void addEvent(SimulationEvent myEvent) {
-        eventQueue.add(myEvent);
+    public void addEvent(SimulationEvent e) {
+        pq.add(e);
     }
 
     // Retrieve and Remove the earliest Event in the queue
     public SimulationEvent retrieveEvent() {
-        return eventQueue.poll();
+        return pq.poll();
     }
 
     // Check if queue has no events to proceed with
     public boolean isEmpty() {
-        return eventQueue.isEmpty();
+        return pq.isEmpty();
     }
-
-    public int queueLength() {
-        return eventQueue.size();
-    }
-
-    public void emptyQueue() {
-        eventQueue.clear();
-    }
-
 }

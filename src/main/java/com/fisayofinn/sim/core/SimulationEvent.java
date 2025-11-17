@@ -1,20 +1,13 @@
 package com.fisayofinn.sim.core;
 
-/** Single scheduled change in the simulation timeline. */
+/** A scheduled event in the simulation time */
 public class SimulationEvent implements Comparable<SimulationEvent> {
 
-    // Simulation Event Types
-    public enum Type {
-        ON,   // A traffic source switches ON
-        OFF,  // A traffic source switches OFF
-        END   // Simulation ends at this time
-    }
-
     private final double time;
-    private final Type type;
+    private final SimulationEventType type;
     private final int userID;
 
-    public SimulationEvent(double time, Type type, int userID) {
+    public SimulationEvent(double time, SimulationEventType type, int userID) {
         this.time = time;
         this.type = type;
         this.userID = userID;
@@ -29,6 +22,6 @@ public class SimulationEvent implements Comparable<SimulationEvent> {
     }
 
     public double getTime() { return time; }
-    public Type getType() { return type; }
+    public SimulationEventType getType() { return type; }
     public int getUserID() { return userID; }
 }
