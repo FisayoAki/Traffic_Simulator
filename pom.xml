@@ -8,7 +8,7 @@
     <artifactId>Traffic_Simulator</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Traffic Simulator</name>
-    <description>Discrete-event ON/OFF traffic simulator</description>
+    <description>Discrete-event ON/OFF traffic simulator (Sprint 2)</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,7 +36,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Run JUnit 5 -->
+            <!-- Run JUnit 5 tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -46,7 +46,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Package a runnable JAR pointing to TrafficSimApp -->
+            <!-- Package a runnable JAR (main = TrafficSimApp) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
