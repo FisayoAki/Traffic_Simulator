@@ -33,11 +33,11 @@ public class SimulationManager {
 
             // First event type is ON (since we start OFF).
             double firstTime = src.firstToggleAt(simTime); // now + OFF duration (no mutation)
-            eventQueue.addEvent(new Event(firstTime, EventType.ON, src.id()));
+            eventQueue.addEvent(new Event(firstTime, SimulationEventType.ON, src.id()));
         }
 
         // End-of-simulation sentinel
-        eventQueue.addEvent(new Event(endTime, EventType.END, -1));
+        eventQueue.addEvent(new Event(endTime, SimulationEventType.END, -1));
     }
 
     // Simulation Loop
@@ -52,7 +52,7 @@ public class SimulationManager {
     // Retrieves Event, changes Source state and creates new Event
     private void processEvent(Event event) {
         int srcId = event.getUserID();
-        if (event.getType() == EventType.END) {   // stop condition
+        if (event.getType() == SimulationEventType.END) {   // stop condition
             return;
         }
 
@@ -67,7 +67,7 @@ public class SimulationManager {
                 // Next toggle will be OFF after an ON duration.
                 double tOff = simTime + src.nextDurationForCurrentState(); // uses current ON state
                 if (tOff < endTime) {
-                    eventQueue.addEvent(new Event(tOff, EventType.OFF, src.id()));
+                    eventQueue.addEvent(new Event(tOff, SimulationEventType.OFF, src.id()));
                 }
                 break;
 
@@ -79,7 +79,7 @@ public class SimulationManager {
                 // Next toggle will be ON after an OFF duration.
                 double tOn = simTime + src.nextDurationForCurrentState(); // uses current OFF state
                 if (tOn < endTime) {
-                    eventQueue.addEvent(new Event(tOn, EventType.ON, src.id()));
+                    eventQueue.addEvent(new Event(tOn, SimulationEventType.ON, src.id()));
                 }
                 break;
 

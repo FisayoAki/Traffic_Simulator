@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EventTest {
     @Test
     public void testEventComparison() {
-        Event e1 = new Event(1.61, EventType.ON, 2);
-        Event e2 = new Event(2.53, EventType.OFF, 3);
-        Event e3 = new Event(2.53, EventType.ON, 1);
-        Event e4 = new Event(3.02, EventType.OFF, 4);
+        Event e1 = new Event(1.61, SimulationEventType.ON, 2);
+        Event e2 = new Event(2.53, SimulationEventType.OFF, 3);
+        Event e3 = new Event(2.53, SimulationEventType.ON, 1);
+        Event e4 = new Event(3.02, SimulationEventType.OFF, 4);
 
         assertTrue(e1.compareTo(e2) < 0, "e1 should occur before e2");
         assertTrue(e2.compareTo(e4) < 0, "e2 should occur before e4");
@@ -28,7 +28,7 @@ public class EventTest {
 
     @Test
     public void testToString() {
-        Event e = new Event(1.0, EventType.ON, 5);
+        Event e = new Event(1.0, SimulationEventType.ON, 5);
         assertTrue(e.toString().contains("Event"));
     }
 }
