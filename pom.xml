@@ -8,7 +8,7 @@
     <artifactId>Traffic_Simulator</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Traffic Simulator</name>
-    <description>Phase 1 — Core Building Blocks</description>
+    <description>Discrete-event ON/OFF traffic simulator</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,7 +36,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Run JUnit 5 tests -->
+            <!-- Run JUnit 5 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -46,7 +46,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Runnable JAR -->
+            <!-- Package a runnable JAR pointing to TrafficSimApp -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -55,31 +55,10 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.fisayofinn.sim.App</mainClass>
+                            <mainClass>com.fisayofinn.sim.TrafficSimApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
-
-            <!-- Optional: javadocs like your other project -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.6.3</version>
-                <configuration>
-                    <failOnError>false</failOnError>
-                    <source>25</source>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-javadoc</id>
-                        <goals><goal>javadoc</goal></goals>
-                    </execution>
-                    <execution>
-                        <id>attach-javadoc-jar</id>
-                        <goals><goal>jar</goal></goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

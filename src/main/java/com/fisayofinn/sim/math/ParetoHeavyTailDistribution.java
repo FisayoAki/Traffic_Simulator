@@ -1,0 +1,23 @@
+package com.fisayofinn.sim.math;
+
+import java.util.Random;
+
+
+public final class ParetoHeavyTailDistribution {
+    private final double alpha, xm;
+    private final Random rng;
+
+    public ParetoHeavyTailDistribution(double alpha, double xm, Random rng) {
+        if (alpha <= 0.0) throw new IllegalArgumentException("alpha must be > 0");
+        if (xm <= 0.0)    throw new IllegalArgumentException("xm must be > 0");
+        if (rng == null)  throw new NullPointerException("rng must not be null");
+        this.alpha = alpha; this.xm = xm; this.rng = rng;
+    }
+
+    /** One Pareto sample (always >= xm). */
+    public double sample() {
+        double u = rng.nextDouble();          // [0,1)
+        if (u <= 0.0) u = Double.MIN_VALUE;   // guard 0
+        return xm / Math.pow(u, 1.0 / alpha);
+    }
+}
