@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
-class HeavyTailTest {
+class ParetoHeavyTailDistributionTest {
     @Test
     void samplesAreAtLeastXmAndReproducible() {
-        HeavyTail a = new HeavyTail(1.5, 0.5, new Random(42));
-        HeavyTail b = new HeavyTail(1.5, 0.5, new Random(42));
+        ParetoHeavyTailDistribution a = new ParetoHeavyTailDistribution(1.5, 0.5, new Random(42));
+        ParetoHeavyTailDistribution b = new ParetoHeavyTailDistribution(1.5, 0.5, new Random(42));
 
         for (int i = 0; i < 100; i++) {
             double xa = a.sample();
