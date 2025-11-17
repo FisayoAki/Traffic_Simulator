@@ -1,7 +1,9 @@
 package com.fisayofinn.sim.core;
 
-/** Event objects */
-public class Event implements Comparable<Event>{
+/**
+ * Event objects
+ */
+public class Event implements Comparable<Event> {
 
     private final double time;
     private final EventType type;
@@ -22,7 +24,7 @@ public class Event implements Comparable<Event>{
         }
         // If equal timing, prioritise lower userID
         return Integer.compare(this.userID, other.userID);
-        }
+    }
 
     @Override
     public String toString() {
@@ -35,14 +37,13 @@ public class Event implements Comparable<Event>{
         return time;
     }
 
-    public EventType getType(){
+    public EventType getType() {
         return type;
     }
 
     public int getUserID() {
         return userID;
     }
-
 
 
 }

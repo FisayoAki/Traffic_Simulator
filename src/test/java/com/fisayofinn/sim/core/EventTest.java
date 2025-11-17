@@ -1,7 +1,5 @@
-package com.fisayofinn.sim.math;
+package com.fisayofinn.sim.core;
 
-import com.fisayofinn.sim.core.Event;
-import com.fisayofinn.sim.core.EventType;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
