@@ -7,25 +7,61 @@ import java.util.Scanner;
 public class TrafficSimApp {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
-        System.out.print("Enter simulation end time (seconds) [default 10.0]: ");
-        String endInput = scanner.nextLine().trim();
-        double endTime = endInput.isEmpty()
-                ? 10.0
-                : Double.parseDouble(endInput);
+        double endTime = readPositiveDouble(in,
+                "Enter simulation end time (seconds) [default 10.0]: ",
+                10.0);
 
-        System.out.print("Enter number of sources [default 3]: ");
-        String srcInput = scanner.nextLine().trim();
-        int sources = srcInput.isEmpty()
-                ? 3
-                : Integer.parseInt(srcInput);
+        int sources = readPositiveInt(in,
+                "Enter number of sources [default 3]: ",
+                3);
 
         TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources);
         sim.run();
 
-        System.out.println("Done at t=" + sim.getSimTime() +
-                ", active=" + sim.getActiveSources() +
-                ", points=" + sim.getSeries().size());
+        System.out.println("Done at t=" + sim.getSimTime()
+                + ", active=" + sim.getActiveSources()
+                + ", points=" + sim.getSeries().size());
+    }
+
+    private static double readPositiveDouble(Scanner in, String prompt, double defaultValue) {
+        while (true) {
+            System.out.print(prompt);
+            String line = in.nextLine().trim();
+            if (line.isEmpty()) {
+                return defaultValue;
+            }
+            try {
+                double v = Double.parseDouble(line);
+                if (v > 0) {
+                    return v;
+                } else {
+                    System.out.println("Please enter a positive number.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Not a valid number, try again.");
+            }
+        }
+    }
+
+    private static int readPositiveInt(Scanner in, String prompt, int defaultValue) {
+        while (true) {
+            System.out.print(prompt);
+            String line = in.nextLine().trim();
+            if (line.isEmpty()) {
+                return defaultValue;
+            }
+            try {
+                int v = Integer.parseInt(line);
+                if (v >= 1) {
+                    return v;
+                } else {
+                    System.out.println("Please enter an integer >= 1.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Not a valid integer, try again.");
+            }
+        }
     }
 }
