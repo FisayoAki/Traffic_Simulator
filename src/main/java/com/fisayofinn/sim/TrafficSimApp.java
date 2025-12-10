@@ -1,67 +1,87 @@
-package com.fisayofinn.sim;
+    package com.fisayofinn.sim;
 
-import com.fisayofinn.sim.core.TrafficSimulationEngine;
+    import com.fisayofinn.sim.core.TrafficSimulationEngine;
 
-import java.util.Scanner;
+    import java.util.Scanner;
 
-public class TrafficSimApp {
+    public class TrafficSimApp {
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
 
-        double endTime = readPositiveDouble(in,
-                "Enter simulation end time (seconds) [default 10.0]: ",
-                10.0);
+            boolean running = true;
+            while (running) {
+                System.out.println();
+                System.out.println("=== On/Off Traffic Simulator ===");
+                System.out.println("R - Run simulation");
+                System.out.println("Q - Quit");
+                System.out.print("Choice [R/Q]: ");
 
-        int sources = readPositiveInt(in,
-                "Enter number of sources [default 3]: ",
-                3);
+                String choice = in.nextLine().trim();
 
-        TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources);
-        sim.run();
+                if (choice.isEmpty() || choice.equalsIgnoreCase("r")) {
+                    double endTime = readPositiveDouble(in,
+                            "Enter simulation end time (seconds) [default 10.0]: ",
+                            10.0);
 
-        System.out.println("Done at t=" + sim.getSimTime()
-                + ", active=" + sim.getActiveSources()
-                + ", points=" + sim.getSeries().size());
-    }
+                    int sources = readPositiveInt(in,
+                            "Enter number of sources [default 3]: ",
+                            3);
 
-    private static double readPositiveDouble(Scanner in, String prompt, double defaultValue) {
-        while (true) {
-            System.out.print(prompt);
-            String line = in.nextLine().trim();
-            if (line.isEmpty()) {
-                return defaultValue;
-            }
-            try {
-                double v = Double.parseDouble(line);
-                if (v > 0) {
-                    return v;
+                    TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources);
+                    sim.run();
+
+                    System.out.println("Done at t=" + sim.getSimTime()
+                            + ", active=" + sim.getActiveSources()
+                            + ", points=" + sim.getSeries().size());
+
+                } else if (choice.equalsIgnoreCase("q") || choice.equalsIgnoreCase("quit")) {
+                    running = false;
                 } else {
-                    System.out.println("Please enter a positive number.");
+                    System.out.println("Unknown choice: " + choice);
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Not a valid number, try again.");
+            }
+
+            System.out.println("Goodbye.");
+        }
+
+        private static double readPositiveDouble(Scanner in, String prompt, double defaultValue) {
+            while (true) {
+                System.out.print(prompt);
+                String line = in.nextLine().trim();
+                if (line.isEmpty()) {
+                    return defaultValue;
+                }
+                try {
+                    double v = Double.parseDouble(line);
+                    if (v > 0) {
+                        return v;
+                    } else {
+                        System.out.println("Please enter a positive number.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a valid number, try again.");
+                }
+            }
+        }
+
+        private static int readPositiveInt(Scanner in, String prompt, int   defaultValue) {
+            while (true) {
+                System.out.print(prompt);
+                String line = in.nextLine().trim();
+                if (line.isEmpty()) {
+                    return defaultValue;
+                }
+                try {
+                    int v = Integer.parseInt(line);
+                    if (v >= 1) {
+                        return v;
+                    } else {
+                        System.out.println("Please enter an integer >= 1.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Not a valid integer, try again.");
+                }
             }
         }
     }
-
-    private static int readPositiveInt(Scanner in, String prompt, int defaultValue) {
-        while (true) {
-            System.out.print(prompt);
-            String line = in.nextLine().trim();
-            if (line.isEmpty()) {
-                return defaultValue;
-            }
-            try {
-                int v = Integer.parseInt(line);
-                if (v >= 1) {
-                    return v;
-                } else {
-                    System.out.println("Please enter an integer >= 1.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Not a valid integer, try again.");
-            }
-        }
-    }
-}
