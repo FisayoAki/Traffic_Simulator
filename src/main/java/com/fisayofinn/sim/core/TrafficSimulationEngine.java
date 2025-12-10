@@ -14,19 +14,24 @@ public class TrafficSimulationEngine {
     private final SimulationEventQueue eventQueue;
     private final ArrayList<OnOffTrafficSource> sources;
     private final AggregateTimeSeries series;
+    private final boolean verbose;
     private double simTime;
     private double endTime;
     private int activeSources;
 
     public TrafficSimulationEngine(double endTime, int sourceCount) {
+        this(endTime, sourceCount, false);
+    }
+
+    public TrafficSimulationEngine(double endTime, int sourceCount, boolean verbose) {
         this.endTime = endTime;
         this.simTime = 0.0;
         this.activeSources = 0;
+        this.verbose = verbose;
         this.eventQueue = new SimulationEventQueue();
         this.sources = new ArrayList<>();
         this.series = new AggregateTimeSeries();
 
-        // create sources
         for (int i = 1; i <= sourceCount; i++) {
             ParetoHeavyTailDistribution onDur =
                     new ParetoHeavyTailDistribution(1.4, 0.5, new Random(1000 + i));
@@ -43,13 +48,15 @@ public class TrafficSimulationEngine {
         eventQueue.addEvent(new SimulationEvent(endTime, SimulationEventType.END, -1));
     }
 
-    // package-private constructor for tests
+    // package-private for tests
     TrafficSimulationEngine(double endTime,
                             ArrayList<OnOffTrafficSource> givenSources,
-                            SimulationEventQueue queue) {
+                            SimulationEventQueue queue,
+                            boolean verbose) {
         this.endTime = endTime;
         this.simTime = 0.0;
         this.activeSources = 0;
+        this.verbose = verbose;
         this.eventQueue = queue;
         this.sources = givenSources;
         this.series = new AggregateTimeSeries();
@@ -71,6 +78,7 @@ public class TrafficSimulationEngine {
             }
             simTime = e.getTime();
             if (e.getType() == SimulationEventType.END) {
+                logEvent(e);
                 break;
             }
 
@@ -80,6 +88,7 @@ public class TrafficSimulationEngine {
                 src.setOn(true);
                 activeSources++;
                 series.add(simTime, activeSources);
+                logEvent(e);
 
                 double tOff = simTime + src.nextDurationForCurrentState();
                 if (tOff < endTime) {
@@ -89,12 +98,22 @@ public class TrafficSimulationEngine {
                 src.setOn(false);
                 activeSources--;
                 series.add(simTime, activeSources);
+                logEvent(e);
 
                 double tOn = simTime + src.nextDurationForCurrentState();
                 if (tOn < endTime) {
                     eventQueue.addEvent(new SimulationEvent(tOn, SimulationEventType.ON, src.id()));
                 }
             }
+        }
+    }
+
+    private void logEvent(SimulationEvent e) {
+        if (verbose) {
+            System.out.println("Event at t=" + simTime
+                    + " type=" + e.getType()
+                    + " src=" + e.getUserID()
+                    + " active=" + activeSources);
         }
     }
 
@@ -114,7 +133,6 @@ public class TrafficSimulationEngine {
         return sources;
     }
 
-    /** simple max over recorded samples */
     public int getPeakActiveSources() {
         int max = 0;
         for (int v : series.values()) {
@@ -125,7 +143,6 @@ public class TrafficSimulationEngine {
         return max;
     }
 
-    /** simple arithmetic average of recorded samples */
     public double getAverageActiveSources() {
         if (series.size() == 0) {
             return 0.0;
