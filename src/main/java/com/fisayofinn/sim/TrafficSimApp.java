@@ -30,7 +30,11 @@ public class TrafficSimApp {
                         "Enter number of sources [default 3]: ",
                         3);
 
-                TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources);
+                boolean verbose = readYesNo(in,
+                        "Enable verbose event logging? [y/N]: ",
+                        false);
+
+                TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources, verbose);
                 sim.run();
 
                 AggregateTimeSeries series = sim.getSeries();
