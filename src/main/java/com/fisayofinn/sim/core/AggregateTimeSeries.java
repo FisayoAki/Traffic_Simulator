@@ -1,5 +1,9 @@
 package com.fisayofinn.sim.core;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,5 +34,19 @@ public class AggregateTimeSeries {
 
     public boolean isEmpty() {
         return times.isEmpty();
+    }
+
+    /**
+     * Write the series to a CSV file with header.
+     */
+    public void writeCsv(Path path) throws IOException {
+        try (BufferedWriter out = Files.newBufferedWriter(path)) {
+            out.write("time,active");
+            out.newLine();
+            for (int i = 0; i < times.size(); i++) {
+                out.write(times.get(i) + "," + values.get(i));
+                out.newLine();
+            }
+        }
     }
 }

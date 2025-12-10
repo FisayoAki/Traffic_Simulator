@@ -3,6 +3,7 @@ package com.fisayofinn.sim;
 import com.fisayofinn.sim.core.AggregateTimeSeries;
 import com.fisayofinn.sim.core.TrafficSimulationEngine;
 
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class TrafficSimApp {
@@ -46,6 +47,24 @@ public class TrafficSimApp {
                 System.out.println("Samples: " + series.size());
                 System.out.println("Peak active: " + sim.getPeakActiveSources());
                 System.out.println("Average active: " + sim.getAverageActiveSources());
+
+                boolean export = readYesNo(in,
+                        "Export results to CSV file? [y/N]: ",
+                        false);
+                if (export) {
+                    System.out.print("Enter CSV file name: ");
+                    String fileName = in.nextLine().trim();
+                    if (!fileName.isEmpty()) {
+                        try {
+                            series.writeCsv(Paths.get(fileName));
+                            System.out.println("Wrote CSV to " + fileName);
+                        } catch (Exception e) {
+                            System.out.println("Error writing CSV: " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("No file name given, not exporting.");
+                    }
+                }
 
             } else if (choice.equalsIgnoreCase("q") || choice.equalsIgnoreCase("quit")) {
                 running = false;
@@ -94,6 +113,23 @@ public class TrafficSimApp {
             } catch (NumberFormatException e) {
                 System.out.println("Not a valid integer, try again.");
             }
+        }
+    }
+
+    private static boolean readYesNo(Scanner in, String prompt, boolean defaultValue) {
+        while (true) {
+            System.out.print(prompt);
+            String line = in.nextLine().trim();
+            if (line.isEmpty()) {
+                return defaultValue;
+            }
+            if (line.equalsIgnoreCase("y") || line.equalsIgnoreCase("yes")) {
+                return true;
+            }
+            if (line.equalsIgnoreCase("n") || line.equalsIgnoreCase("no")) {
+                return false;
+            }
+            System.out.println("Please answer y or n.");
         }
     }
 }
