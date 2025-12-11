@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class TrafficSimApp {
 
-    public static void main(String[] args) {
+    static void main() {
         Scanner in = new Scanner(System.in);
 
         boolean running = true;
@@ -22,17 +22,15 @@ public class TrafficSimApp {
             String choice = in.nextLine().trim();
 
             if (choice.isEmpty() || choice.equalsIgnoreCase("r")) {
-                double endTime = readPositiveDouble(in,
-                        "Enter simulation end time (seconds) [default 10.0]: ",
-                        10.0);
+                double endTime = readPositiveDouble(in
+                );
 
-                int sources = readPositiveInt(in,
-                        "Enter number of sources [default 3]: ",
-                        3);
+                int sources = readPositiveInt(in
+                );
 
                 boolean verbose = readYesNo(in,
-                        "Enable verbose event logging? [y/N]: ",
-                        false);
+                        "Enable verbose event logging? [y/N]: "
+                );
 
                 TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources, verbose);
                 sim.run();
@@ -53,8 +51,8 @@ public class TrafficSimApp {
                 System.out.println("Average active: " + sim.getAverageActiveSources());
 
                 boolean export = readYesNo(in,
-                        "Export results to CSV file? [y/N]: ",
-                        false);
+                        "Export results to CSV file? [y/N]: "
+                );
                 if (export) {
                     System.out.print("Enter CSV file name: ");
                     String fileName = in.nextLine().trim();
@@ -80,12 +78,12 @@ public class TrafficSimApp {
         System.out.println("Goodbye.");
     }
 
-    private static double readPositiveDouble(Scanner in, String prompt, double defaultValue) {
+    private static double readPositiveDouble(Scanner in) {
         while (true) {
-            System.out.print(prompt);
+            System.out.print("Enter simulation end time (seconds) [default 10.0]: ");
             String line = in.nextLine().trim();
             if (line.isEmpty()) {
-                return defaultValue;
+                return 10.0;
             }
             try {
                 double v = Double.parseDouble(line);
@@ -100,12 +98,12 @@ public class TrafficSimApp {
         }
     }
 
-    private static int readPositiveInt(Scanner in, String prompt, int defaultValue) {
+    private static int readPositiveInt(Scanner in) {
         while (true) {
-            System.out.print(prompt);
+            System.out.print("Enter number of sources [default 3]: ");
             String line = in.nextLine().trim();
             if (line.isEmpty()) {
-                return defaultValue;
+                return 3;
             }
             try {
                 int v = Integer.parseInt(line);
@@ -120,12 +118,12 @@ public class TrafficSimApp {
         }
     }
 
-    private static boolean readYesNo(Scanner in, String prompt, boolean defaultValue) {
+    private static boolean readYesNo(Scanner in, String prompt) {
         while (true) {
             System.out.print(prompt);
             String line = in.nextLine().trim();
             if (line.isEmpty()) {
-                return defaultValue;
+                return false;
             }
             if (line.equalsIgnoreCase("y") || line.equalsIgnoreCase("yes")) {
                 return true;
