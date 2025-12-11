@@ -3,25 +3,26 @@ package com.fisayofinn.sim.core;
 import java.util.PriorityQueue;
 
 /**
- * Simple wrapper around a priority queue of SimulationEvents.
- * Ensures events are retrieved in sorted time order.
+ * Wraps a PriorityQueue of SimulationEvent, ordered by time (and then userID).
  */
 public class SimulationEventQueue {
 
-    // Internal priority queue storing events in sorted order
     private final PriorityQueue<SimulationEvent> pq = new PriorityQueue<>();
 
-    /** Add a new event into the queue. */
+    /** Add an event to the queue. */
     public void addEvent(SimulationEvent e) {
         pq.add(e);
     }
 
-    /** Retrieve and remove the earliest event. */
+    /**
+     * Get and remove the earliest event from the queue,
+     * or null if the queue is empty.
+     */
     public SimulationEvent retrieveEvent() {
         return pq.poll();
     }
 
-    /** @return true if no events remain. */
+    /** @return true if the queue has no more events. */
     public boolean isEmpty() {
         return pq.isEmpty();
     }
