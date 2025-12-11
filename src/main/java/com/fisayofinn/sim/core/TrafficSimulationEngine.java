@@ -28,7 +28,7 @@ public class TrafficSimulationEngine {
     private double simTime;
 
     // Simulation end boundary
-    private double endTime;
+    private final double endTime;
 
     // Count of sources currently ON
     private int activeSources;
@@ -181,9 +181,7 @@ public class TrafficSimulationEngine {
         return series;
     }
 
-    public ArrayList<OnOffTrafficSource> getSources() {
-        return sources;
-    }
+
 
     /**
      * Returns the peak number of simultaneously active sources.
@@ -202,7 +200,7 @@ public class TrafficSimulationEngine {
      * Returns the simple average number of active sources over all samples.
      */
     public double getAverageActiveSources() {
-        if (series.size() == 0) return 0.0;
+        if (series.isEmpty()) return 0.0;
 
         int sum = 0;
         for (int v : series.values()) {
