@@ -1,3 +1,3 @@
 package com.fisayofinn.sim.core;
 
-public enum SimulationEventType {ON, OFF, RECORD, END}
+public enum SimulationEventType {ON, OFF, END}

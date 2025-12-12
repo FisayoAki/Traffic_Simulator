@@ -79,9 +79,8 @@ public class TrafficSimulationEngine {
     }
 
     /**
-     * Package-private constructor used only for tests
-     * (allows injecting custom sources and event queue).
-     */
+    * Constructor for testing (allows specified source and event queue).
+    */
     TrafficSimulationEngine(double endTime,
                             ArrayList<OnOffTrafficSource> givenSources,
                             SimulationEventQueue queue,

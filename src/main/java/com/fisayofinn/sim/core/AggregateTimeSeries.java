@@ -38,7 +38,7 @@ public class AggregateTimeSeries {
     }
 
     /**
-     * Write this time series to a CSV file. Header: "time,active".
+     * Write this time series to a CSV file: "time,active"
      */
     public void writeCsv(Path path) throws IOException {
         try (BufferedWriter out = Files.newBufferedWriter(path)) {
