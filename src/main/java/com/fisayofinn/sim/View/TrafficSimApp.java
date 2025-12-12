@@ -33,8 +33,35 @@ public class TrafficSimApp {
                         "Enable verbose event logging? [y/N]: "
                 );
 
+                double onAlpha = readParetoParam(in,
+                        "Enter ON Pareto alpha [default 1.4]: ",
+                        1.4);
+
+                double onXm = readParetoParam(in,
+                        "Enter ON Pareto xm [default 0.5]: ",
+                        0.5);
+
+                double offAlpha = readParetoParam(in,
+                        "Enter OFF Pareto alpha [default 1.8]: ",
+                        1.8);
+
+                double offXm = readParetoParam(in,
+                        "Enter OFF Pareto xm [default 0.2]: ",
+                        0.2);
+
+
                 // Create and execute the simulation
-                TrafficSimulationEngine sim = new TrafficSimulationEngine(endTime, sources, verbose);
+                TrafficSimulationEngine sim =
+                        new TrafficSimulationEngine(
+                                endTime,
+                                sources,
+                                onAlpha,
+                                onXm,
+                                offAlpha,
+                                offXm,
+                                verbose
+                        );
+
                 sim.run();
 
                 // Retrieve the recorded time-series results
@@ -155,4 +182,28 @@ public class TrafficSimApp {
             System.out.println("Please answer y or n.");
         }
     }
+
+    private static double readParetoParam(Scanner in,
+                                          String prompt,
+                                          double defaultValue) {
+        while (true) {
+            System.out.print(prompt);
+            String line = in.nextLine().trim();
+            if (line.isEmpty()) {
+                return defaultValue;
+            }
+            try {
+                double v = Double.parseDouble(line);
+                if (v > 0) {
+                    return v;
+                }
+                System.out.println("Value must be > 0.");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number.");
+            }
+        }
+    }
+
+
+
 }

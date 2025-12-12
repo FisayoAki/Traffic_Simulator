@@ -80,8 +80,8 @@ public class TrafficSimulationEngine {
     }
 
     /**
-    * Constructor for testing (allows specified source and event queue).
-    */
+     * Constructor for testing (allows specified source and event queue).
+     */
     TrafficSimulationEngine(double endTime,
                             ArrayList<OnOffTrafficSource> givenSources,
                             SimulationEventQueue queue,
@@ -105,6 +105,46 @@ public class TrafficSimulationEngine {
 
         eventQueue.addEvent(new SimulationEvent(endTime, SimulationEventType.END, -1));
     }
+
+
+    public TrafficSimulationEngine(double endTime,
+                                   int sourceCount,
+                                   double onAlpha,
+                                   double onXm,
+                                   double offAlpha,
+                                   double offXm,
+                                   boolean verbose) {
+
+        this.endTime = endTime;
+        this.simTime = 0.0;
+        this.activeSources = 0;
+        this.verbose = verbose;
+        this.eventQueue = new SimulationEventQueue();
+        this.sources = new ArrayList<>();
+        this.series = new AggregateTimeSeries();
+
+        for (int i = 1; i <= sourceCount; i++) {
+            ParetoHeavyTailDistribution onDur =
+                    new ParetoHeavyTailDistribution(onAlpha, onXm, new Random(1000 + i));
+            ParetoHeavyTailDistribution offDur =
+                    new ParetoHeavyTailDistribution(offAlpha, offXm, new Random(2000 + i));
+
+            OnOffTrafficSource src =
+                    new OnOffTrafficSource(i, onDur, offDur, false);
+
+            sources.add(src);
+
+            double firstTime = src.firstToggleAt(simTime);
+            if (firstTime < endTime) {
+                eventQueue.addEvent(
+                        new SimulationEvent(firstTime, SimulationEventType.ON, src.id()));
+            }
+        }
+
+        eventQueue.addEvent(
+                new SimulationEvent(endTime, SimulationEventType.END, -1));
+    }
+
 
     /**
      * Processes events in chronological order until no events remain or END is reached.
@@ -157,8 +197,8 @@ public class TrafficSimulationEngine {
         }
     }
 
-     // Helper for verbose logging of events.
-        private void logEvent(SimulationEvent e) {
+    // Helper for verbose logging of events.
+    private void logEvent(SimulationEvent e) {
         if (verbose) {
             System.out.println(
                     "Event at t=" + simTime +
@@ -180,7 +220,6 @@ public class TrafficSimulationEngine {
     public AggregateTimeSeries getSeries() {
         return series;
     }
-
 
 
     /**
