@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class TrafficSimApp {
 
-    static void main() {
+  public static void main() {
         Scanner in = new Scanner(System.in);
 
         boolean running = true; // Controls the main menu loop
