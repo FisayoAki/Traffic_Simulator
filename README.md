@@ -87,10 +87,3 @@ Plotting the CSV in Excel over the whole duration and on a zoomed-in window usua
 - **AggregateTimeSeries** – Records traffic samples and writes CSV  
 
 ---
-
-## Notes / Limitations
-
-- No GUI (intentionally a console application)  
-- The model is simplified: only ON/OFF behaviour and aggregate counts  
-- More advanced analysis (like estimating the Hurst parameter) would need external tools  
-
