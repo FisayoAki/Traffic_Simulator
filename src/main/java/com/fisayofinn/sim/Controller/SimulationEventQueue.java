@@ -1,4 +1,4 @@
-package com.fisayofinn.sim.core;
+package com.fisayofinn.sim.Controller;
 
 import java.util.PriorityQueue;
 

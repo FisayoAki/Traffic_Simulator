@@ -1,4 +1,4 @@
-package com.fisayofinn.sim.math;
+package com.fisayofinn.sim.Model;
 
 import java.util.Random;
 

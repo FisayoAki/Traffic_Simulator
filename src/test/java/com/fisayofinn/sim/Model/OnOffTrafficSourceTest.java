@@ -1,6 +1,5 @@
-package com.fisayofinn.sim.sources;
+package com.fisayofinn.sim.Model;
 
-import com.fisayofinn.sim.math.ParetoHeavyTailDistribution;
 import org.junit.jupiter.api.Test;
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;

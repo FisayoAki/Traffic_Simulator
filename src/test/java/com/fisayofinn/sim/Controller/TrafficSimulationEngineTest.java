@@ -1,5 +1,6 @@
-package com.fisayofinn.sim.core;
+package com.fisayofinn.sim.Controller;
 
+import com.fisayofinn.sim.Model.AggregateTimeSeries;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package com.fisayofinn.sim.core;
+package com.fisayofinn.sim.Controller;
 
 /** A scheduled event in the simulation time */
 public class SimulationEvent implements Comparable<SimulationEvent> {

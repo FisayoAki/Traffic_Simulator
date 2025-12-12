@@ -1,7 +1,7 @@
-package com.fisayofinn.sim;
+package com.fisayofinn.sim.View;
 
-import com.fisayofinn.sim.core.AggregateTimeSeries;
-import com.fisayofinn.sim.core.TrafficSimulationEngine;
+import com.fisayofinn.sim.Model.AggregateTimeSeries;
+import com.fisayofinn.sim.Controller.TrafficSimulationEngine;
 
 import java.nio.file.Paths;
 import java.util.Scanner;

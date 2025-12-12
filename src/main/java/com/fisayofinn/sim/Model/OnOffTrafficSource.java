@@ -1,6 +1,4 @@
-package com.fisayofinn.sim.sources;
-
-import com.fisayofinn.sim.math.ParetoHeavyTailDistribution;
+package com.fisayofinn.sim.Model;
 
 /**
  * A single traffic source that alternates between ON and OFF periods.

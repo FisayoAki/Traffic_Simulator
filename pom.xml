@@ -55,7 +55,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.fisayofinn.sim.TrafficSimApp</mainClass>
+                            <mainClass>com.fisayofinn.sim.View.TrafficSimApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

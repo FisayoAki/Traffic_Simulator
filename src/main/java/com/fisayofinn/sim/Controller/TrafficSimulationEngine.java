@@ -1,7 +1,8 @@
-package com.fisayofinn.sim.core;
+package com.fisayofinn.sim.Controller;
 
-import com.fisayofinn.sim.math.ParetoHeavyTailDistribution;
-import com.fisayofinn.sim.sources.OnOffTrafficSource;
+import com.fisayofinn.sim.Model.AggregateTimeSeries;
+import com.fisayofinn.sim.Model.ParetoHeavyTailDistribution;
+import com.fisayofinn.sim.Model.OnOffTrafficSource;
 
 import java.util.ArrayList;
 import java.util.Random;
